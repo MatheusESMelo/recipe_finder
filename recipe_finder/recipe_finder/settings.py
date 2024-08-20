@@ -122,3 +122,5 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+SPOONACULAR_API_KEY = '561d46642be3441c84a18a832523971e'
