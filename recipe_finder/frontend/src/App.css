@@ -1,0 +1,52 @@
+/* App.css */
+.app-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .app-title {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .search-bar-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .search-bar-container input {
+    padding: 10px;
+    width: 300px;
+    font-size: 1rem;
+  }
+  
+  .search-bar-container button {
+    padding: 10px;
+    font-size: 1rem;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+  .modal {
+    position: sticky;
+    top: 10%;
+    left: 35%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+}
+  
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  

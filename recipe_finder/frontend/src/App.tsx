@@ -3,6 +3,8 @@ import SearchBar from "./components/SearchBar";
 import RecipeList from "./components/RecipeList";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Modal from "react-modal";
+import "./App.css";
 
 interface Recipe {
   title: string;
@@ -17,6 +19,7 @@ const App: React.FC = () => {
   const [hasMore, setHasMore] = useState(true);
   const [currentIngredients, setCurrentIngredients] = useState<string[]>([]);
   const [hasSearched, setHasSearched] = useState(false);
+  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
 
   const fetchRecipes = async (ingredients: string[], page: number) => {
     try {
@@ -56,9 +59,17 @@ const App: React.FC = () => {
     setPage((prevPage) => prevPage + 1);
   };
 
+  const handleShowMore = (recipe: Recipe) => {
+    setSelectedRecipe(recipe);
+  };
+
+  const closeModal = () => {
+    setSelectedRecipe(null);
+  };
+
   return (
-    <div>
-      <h1>Recipe Finder App</h1>
+    <div className="app-container">
+      <h1 className="app-title">Recipe Finder App</h1>
       <SearchBar onSearch={handleSearch} />
       {hasSearched && (
         <InfiniteScroll
@@ -68,8 +79,36 @@ const App: React.FC = () => {
           loader={<h4>Loading more recipes...</h4>}
           endMessage={<p>No more recipes to show</p>}
         >
-          <RecipeList recipes={recipes} />
+          <RecipeList recipes={recipes} onShowMore={handleShowMore} />
         </InfiniteScroll>
+      )}
+
+      {selectedRecipe && (
+        <Modal
+          isOpen={true}
+          onRequestClose={closeModal}
+          contentLabel="Recipe Details"
+          className="modal"
+          overlayClassName="modal-overlay"
+        >
+          <h2>{selectedRecipe.title}</h2>
+          <img
+            src={selectedRecipe.image_url}
+            alt={selectedRecipe.title}
+            style={{ width: "100%", height: "auto" }}
+          />
+          <h3>Ingredients:</h3>
+          <ul>
+            {selectedRecipe.ingredients.map((ingredient, index) => (
+              <li key={index}>{ingredient}</li>
+            ))}
+          </ul>
+          <h3>Instructions:</h3>
+          <p>{selectedRecipe.instructions}</p>
+          <button onClick={closeModal} style={{ marginTop: "20px" }}>
+            Close
+          </button>
+        </Modal>
       )}
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./css/SearchBar.css";
 
 interface SearchBarProps {
   onSearch: (ingredients: string[]) => void;
@@ -17,7 +18,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   };
 
   return (
-    <div>
+    <div className="search-bar-container">
       <input
         type="text"
         value={input}

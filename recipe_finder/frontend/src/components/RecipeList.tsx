@@ -1,4 +1,5 @@
 import React from "react";
+import "./css/RecipeList.css";
 
 interface Recipe {
   title: string;
@@ -9,28 +10,25 @@ interface Recipe {
 
 interface RecipeListProps {
   recipes: Recipe[];
+  onShowMore: (recipe: Recipe) => void;
 }
 
-const RecipeList: React.FC<RecipeListProps> = ({ recipes }) => {
+const RecipeList: React.FC<RecipeListProps> = ({ recipes, onShowMore }) => {
   if (!recipes || recipes.length === 0) {
     return <div>No recipes found</div>;
   }
 
   return (
-    <div>
+    <div className="recipe-list">
       {recipes.map((recipe, index) => (
-        <div key={index}>
+        <div className="recipe-card" key={index}>
           <h2>{recipe.title}</h2>
           <img
             src={recipe.image_url}
             alt={recipe.title}
-            style={{ width: "100px", height: "100px" }}
+            className="recipe-image"
           />
-          <ul>
-            {recipe.ingredients.map((ingredient, i) => (
-              <li key={i}>{ingredient}</li>
-            ))}
-          </ul>
+          <button onClick={() => onShowMore(recipe)}>Show More</button>
         </div>
       ))}
     </div>
