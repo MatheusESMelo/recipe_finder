@@ -50,7 +50,7 @@ const App: React.FC = () => {
     if (page > 1) {
       fetchRecipes(currentIngredients, page);
     }
-  }, [page]);
+  }, [currentIngredients, page]);
 
   const fetchMoreData = () => {
     setPage((prevPage) => prevPage + 1);
